@@ -8,7 +8,6 @@ export default function CreateEvent() {
   const [dateTime, setDateTime] = useState("");
   const [location, setLocation] = useState("");
   const [capacity, setCapacity] = useState("");
-
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -22,69 +21,25 @@ export default function CreateEvent() {
         capacity,
       });
 
-      // ✅ Go directly to Events
-      navigate("/events");
+      // ✅ BACK TO EVENTS
+      navigate("/event");
     } catch (error) {
       alert(error.response?.data?.message || "Failed to create event");
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-lg"
-      >
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-          Create Event
-        </h2>
+    <div className="min-h-screen flex items-center justify-center">
+      <form onSubmit={handleSubmit} className="bg-white p-6 rounded w-full max-w-lg">
+        <h2 className="text-xl font-bold mb-4">Create Event</h2>
 
-        <input
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4"
-          placeholder="Event Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
+        <input className="w-full border p-2 mb-2" placeholder="Title" value={title} onChange={e => setTitle(e.target.value)} required />
+        <textarea className="w-full border p-2 mb-2" placeholder="Description" value={description} onChange={e => setDescription(e.target.value)} required />
+        <input type="datetime-local" className="w-full border p-2 mb-2" value={dateTime} onChange={e => setDateTime(e.target.value)} required />
+        <input className="w-full border p-2 mb-2" placeholder="Location" value={location} onChange={e => setLocation(e.target.value)} required />
+        <input type="number" className="w-full border p-2 mb-4" placeholder="Capacity" value={capacity} onChange={e => setCapacity(e.target.value)} required />
 
-        <textarea
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4"
-          placeholder="Event Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          rows="3"
-          required
-        />
-
-        <input
-          type="datetime-local"
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4"
-          value={dateTime}
-          onChange={(e) => setDateTime(e.target.value)}
-          required
-        />
-
-        <input
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4"
-          placeholder="Location"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          required
-        />
-
-        <input
-          type="number"
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-6"
-          placeholder="Capacity"
-          value={capacity}
-          onChange={(e) => setCapacity(e.target.value)}
-          required
-        />
-
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
-        >
+        <button className="w-full bg-blue-600 text-white py-2 rounded">
           Create Event
         </button>
       </form>

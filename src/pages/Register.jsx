@@ -13,7 +13,7 @@ export default function Register() {
     try {
       await registerUser({ name, email, password });
 
-      // DO NOT store token here
+      // ✅ Register → Login
       navigate("/login");
     } catch (error) {
       alert(error.response?.data?.message || "Registration failed");
@@ -26,12 +26,10 @@ export default function Register() {
         onSubmit={handleSubmit}
         className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-sm"
       >
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
-          Create Account
-        </h2>
+        <h2 className="text-2xl font-bold text-center mb-6">Create Account</h2>
 
         <input
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4"
+          className="w-full border rounded px-4 py-2 mb-4"
           placeholder="Full Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -39,7 +37,7 @@ export default function Register() {
         />
 
         <input
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4"
+          className="w-full border rounded px-4 py-2 mb-4"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -48,29 +46,16 @@ export default function Register() {
 
         <input
           type="password"
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-6"
+          className="w-full border rounded px-4 py-2 mb-6"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
 
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
-        >
+        <button className="w-full bg-blue-600 text-white py-2 rounded">
           Register
         </button>
-
-        <p className="text-sm text-center text-gray-500 mt-4">
-          Already have an account?{" "}
-          <span
-            onClick={() => navigate("/login")}
-            className="text-blue-600 cursor-pointer hover:underline"
-          >
-            Login
-          </span>
-        </p>
       </form>
     </div>
   );
