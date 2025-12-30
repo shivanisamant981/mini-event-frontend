@@ -6,30 +6,23 @@ import CreateEvent from "./pages/CreateEvent";
 import './App.css'
 
 function App() {
-  const isLoggedIn = Boolean(localStorage.getItem("token"));
+  const token = localStorage.getItem("token");
+  const isLoggedIn = token && token !== "undefined";
 
   return (
     <BrowserRouter>
-      {/* Global Tailwind Layout */}
       <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200">
         <Routes>
-          {/* Entry Decision */}
           <Route
             path="/"
             element={
-              isLoggedIn ? (
-                <Navigate to="/events" />
-              ) : (
-                <Navigate to="/register" />
-              )
+              isLoggedIn ? <Navigate to="/events" /> : <Navigate to="/register" />
             }
           />
 
-          {/* Public */}
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
 
-          {/* Protected */}
           <Route
             path="/events"
             element={isLoggedIn ? <Events /> : <Navigate to="/login" />}
@@ -43,7 +36,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
-export default App;
-
-
+export default App
